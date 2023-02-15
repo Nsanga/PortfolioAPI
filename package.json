@@ -20,7 +20,8 @@
     "mariadb": "^3.0.2",
     "mysql2": "^3.1.0",
     "nodemon": "^2.0.20",
-    "sequelize": "^6.28.0"
+    "sequelize": "^6.28.0",
+    "validator": "^13.9.0"
   },
   "devDependencies": {
     "jest": "^29.3.1",

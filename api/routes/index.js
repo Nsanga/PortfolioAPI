@@ -20,7 +20,7 @@ router.use("/competence", competenceRoutes);
 router.use("/education", educationRoutes);
 router.use("/experience", experienceRoutes);
 router.use("/logiciel", logicielRoutes);
-router.use("/projet", projetRoutes);
+router.use("/projet", authenticate, projetRoutes);
 router.use("/realisation", realisationRoutes);
 router.use("/service", serviceRoutes);
 router.use("/auth", authRoutes)

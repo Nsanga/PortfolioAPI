@@ -4,7 +4,7 @@ const {Register, Login, Profile} = require("../controllers/auth.controller")
 const authenticate = require('../middleware/auth')
 
 router.post('/register', Register);
-router.get('/login', Login)
+router.post('/login', Login)
 router.get('/profile', authenticate, Profile)
 
 

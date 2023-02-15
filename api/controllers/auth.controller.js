@@ -24,11 +24,11 @@ const Login = async (req, res) => {
     try {
         if(user !== undefined)
         {
-          res.json({message: `Utilisateur ${req.body.username}`,token:user})
+          res.json({message:user.message, statut:user.status ,token:user.token})
     
         }
         else{
-          res.json({message:`Erreur interne lors de la connexion`})
+          res.json({message:`Erreur interne lors de la connexion`, token: null})
     
         }
       } catch (error) {

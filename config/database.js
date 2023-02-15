@@ -29,8 +29,14 @@ const Realisation = RealisationModel(sequelize, DataTypes)
 const Logiciel = LogicielModel(sequelize, DataTypes)
 
 
-Service.belongsTo(User, { foreignKey: 'id_User',
-as: "user", });
+Service.belongsTo(User, { foreignKey: 'id_User'});
+User.hasMany(Service, {foreignKey: 'id_User'})
+
+Projet.belongsTo(User, { foreignKey: 'id_User'});
+User.hasMany(Projet, {foreignKey: 'id_User'})
+
+Realisation.belongsTo(User, { foreignKey: 'id_User'});
+User.hasMany(Realisation, {foreignKey: 'id_User'})
 
 
   
