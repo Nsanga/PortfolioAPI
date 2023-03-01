@@ -5,7 +5,7 @@ const create = async (req, res) => {
   try {
     if(realisation !== undefined)
     {
-      res.json({message:`${req.body.nom} a été ajouté dans la section réalisation du cv`,data:realisation})
+      res.json({message:`Les informations de ${req.body.nom} a été ajouté dans l'en-tete du CV`,data:realisation})
 
     }
     else{
@@ -76,7 +76,7 @@ const update = async (req, res) => {
   try {
     if(realisation !== undefined)
     {
-      res.json({ message:`La tache ${req.body.name} a bien été modifié.`, data: req.body })
+      res.json({ message:`Les informations de ${req.body.nom} ont bien été modifié dans l'en-tete du CV.`, data: req.body })
 
     }
     else{

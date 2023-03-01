@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       nom: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
       }
     }, {
       timestamps: true,

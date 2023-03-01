@@ -76,7 +76,7 @@ const update = async (req, res) => {
   try {
     if(experience !== undefined)
     {
-      res.json({ message:`La tache ${req.body.name} a bien été modifié.`, data: req.body })
+      res.json({ message:`L'expérience ${req.body.nom} a bien été modifié.`, data: req.body })
 
     }
     else{

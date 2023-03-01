@@ -7,19 +7,18 @@ module.exports = (sequelize, DataTypes) => {
     },
     nom: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
     metier: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
     description: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
     image: {
-      type: DataTypes.STRING,
-      allowNull: false
+      type: DataTypes.STRING
     },
   }, {
     timestamps: true,

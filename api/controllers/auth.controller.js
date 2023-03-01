@@ -1,4 +1,4 @@
-const {register, login, profile} = require('../services/auth.service')
+const {register, login, profile, updateProfile} = require('../services/auth.service')
 
 const Register = async (req, res) => {
   const user = await register(req.body.username, req.body.password)
@@ -24,11 +24,11 @@ const Login = async (req, res) => {
     try {
         if(user !== undefined)
         {
-          res.json({message:user.message, statut:user.status ,token:user.token})
+          res.json({message:user.message, status:user.status ,token:user.token})
     
         }
         else{
-          res.json({message:`Erreur interne lors de la connexion`, token: null})
+          res.json({message:`Erreur interne lors de la connexion`})
     
         }
       } catch (error) {
@@ -55,13 +55,13 @@ const Login = async (req, res) => {
         }
       };
 
-    /*const updateProfile = async (req, res) => {
-        const profile = await profileService.update(req.body, req.params.id_User);
-        console.log(profile)
+    const updateProfiles = async (req, res) => {
+        const profiles = await updateProfile(req.body, req.params.id_User); 
+        console.log(profiles)
         try {
-          if(profile !== undefined)
+          if(profiles !== undefined)
           {
-            res.json({ message:`La tache ${req.body.nom} a bien été modifié.`, data: req.body })
+            res.json({ message:`Modification effectuée.`, data: req.body })
       
           }
           else{
@@ -71,6 +71,6 @@ const Login = async (req, res) => {
         } catch (error) {
           console.log(error);
         }
-      };*/
+      };
 
-module.exports = {Register, Login, Profile};
+module.exports = {Register, Login, Profile, updateProfiles};

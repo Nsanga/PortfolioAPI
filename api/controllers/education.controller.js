@@ -58,7 +58,7 @@ const getOne = async (req, res) => {
   try {
     if(education !== undefined)
     {
-      res.json({message:"Tache récupérée",data:education})
+      res.json({message:"Information récupérée",data:education})
 
     }
     else{
@@ -76,7 +76,7 @@ const update = async (req, res) => {
   try {
     if(education !== undefined)
     {
-      res.json({ message:`La tache ${req.body.name} a bien été modifié.`, data: req.body })
+      res.json({ message:`L'information' ${req.body.nom} a bien été modifié.`, data: req.body })
 
     }
     else{

@@ -7,19 +7,19 @@ module.exports = (sequelize, DataTypes) => {
       },
       nom: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
       },
       diplome: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
       },
       annee: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
       },
     }, {
       timestamps: true,
       createdAt: 'created',
-      updatedAt: false
+      updatedAt: true
     })
   };

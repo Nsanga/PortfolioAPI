@@ -32,7 +32,7 @@ const getAll = async () => {
 const getOne = async (id_Logiciel) => {
   try {
     const Logiciels = await Logiciel.findByPk(id_Logiciel);
-    return Logiciels;
+    return Logiciels; 
   } catch (error) {
     console.log(error);
   }

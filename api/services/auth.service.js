@@ -35,6 +35,7 @@ const register = async (username, password) => {
 
             return { message: 'Utilisateur créé avec succès', status, token };
         }
+
     } catch (error) {
         console.log(error);
     }
@@ -45,33 +46,30 @@ const login = async (username, password) => {
         const status = true
 
         if (!username || !password) {
-            const token = null
             const status = false
-            return ({ message: 'Les champs username et password sont requis', status, token });
+            return ({ message: 'Les champs username et password sont requis', status });
         }
         const Users = await User.findOne({ where: { username: username } })
 
         if (!Users) {
-            const token = null
             const status = false
             const message = `L'utilisateur demandé n'existe pas.`
-            return {message, status, token};
+            return { message, status };
         }
         const isMatch = await bcrypt.compare(password, Users.password);
         if (!isMatch) {
-            const token = null
             const status = false
             const message = 'Invalid credential'
-            return {message, status, token};
+            return { message, status };
         }
 
-        
-        if(status){
+
+        if (status) {
             const token = jwt.sign({ Users }, process.env.ACCESS_TOKEN_SECRET, {
-        expiresIn: '24h'
-        });
-        return {message:'Connexion réussie', status, token };
-    }
+                expiresIn: '24h'
+            });
+            return { message: 'Connexion réussie', status, token };
+        }
 
 
     } catch (error) {
@@ -90,8 +88,8 @@ const profile = async (id_User) => {
 
 const updateProfile = async (body, id_User) => {
     try {
-        const Users = await User.update(body, { where: { id_User: id_User } })
-        return Users;
+        const [ updated ] = await User.update(body, {where: { id_User: id_User}});
+        return updated;
     } catch (error) {
         console.log(error);
     }
