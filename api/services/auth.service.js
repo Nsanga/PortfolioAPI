@@ -2,7 +2,8 @@ const bcrypt = require('bcrypt');
 const validator = require('validator');
 const jwt = require('jsonwebtoken')
 var { User, Projet, Realisation } = require("../../config/database");
-var { Service } = require("../../config/database")
+var { Service } = require("../../config/database");
+const { uploadFile } = require('./upload.service');
 
 const register = async (username, password) => {
     try {
@@ -77,9 +78,11 @@ const login = async (username, password) => {
     }
 };
 
-const profile = async (id_User) => {
+const profile = async (file, id_User) => {
     try {
-        const Users = await User.findOne({ where: { id_User: id_User }, include: [{ model: Service }, { model: Projet }, { model: Realisation }] });
+        const upload = await uploadFile(file, 'Profile')
+        const Users = await User.findOne({ where: { id_User: id_User }, include: [{ model: Service }, { model: Projet }, { model: Realisation }] }, 
+            {...id_User, desc_realisation_image:upload, about_image:upload, image:upload});
         return Users;
     } catch (error) {
         console.log(error);

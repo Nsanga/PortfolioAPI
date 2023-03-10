@@ -1,6 +1,6 @@
 const realisationService = require('../services/realisation.service')
 const create = async (req, res) => {
-  const realisation = await realisationService.create(req.body);
+  const realisation = await realisationService.create(req.file,req.body);
   console.log(realisation)
   try {
     if(realisation !== undefined)
@@ -71,7 +71,7 @@ const getOne = async (req, res) => {
 };
 
 const update = async (req, res) => {
-  const realisation = await realisationService.update(req.body, req.params.id);
+  const realisation = await realisationService.update(req.file,req.body, req.params.id);
   console.log(realisation)
   try {
     if(realisation !== undefined)

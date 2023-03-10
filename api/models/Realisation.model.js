@@ -6,16 +6,13 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true
     },
     nom: {
-      type: DataTypes.STRING,
-      allowNull: true
+      type: DataTypes.STRING
     },
     metier: {
-      type: DataTypes.STRING,
-      allowNull: true
+      type: DataTypes.STRING
     },
     description: {
-      type: DataTypes.STRING,
-      allowNull: true
+      type: DataTypes.STRING
     },
     image: {
       type: DataTypes.STRING

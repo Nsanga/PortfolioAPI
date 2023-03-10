@@ -1,6 +1,7 @@
 const serviceService = require('../services/service.service')
+
 const create = async (req, res) => {
-  const service = await serviceService.create(req.body);
+  const service = await serviceService.create(req.file,req.body);
   console.log(service)
   try {
     if(service !== undefined)

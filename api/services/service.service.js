@@ -1,9 +1,16 @@
 var {Service} = require("../../config/database");
+const { uploadFile } = require("./upload.service");
 
-const create = async (params) => {
+const create = async (file,params) => {
   try {
-    const Services = await Service.create(params)
-    return Services;
+    const upload = await uploadFile(file, 'Service')
+    if(upload){
+      const Services = await Service.create({...params, image:upload})
+      return Services;
+    }else{
+      return {message:`L'image n'a pas été importé`}
+    }
+    
   } catch (error) {
     console.log(error);
   }

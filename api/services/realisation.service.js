@@ -1,9 +1,14 @@
 var {Realisation} = require("../../config/database");
+const { uploadFile } = require("./upload.service");
 
-const create = async (params) => {
+const create = async (file, params) => {
   try {
-    const Realisations = await Realisation.create(params)
-    return Realisations;
+    const upload = await uploadFile(file, 'Realisation')
+    if(upload){
+    const Realisations = await Realisation.create({...params, image:upload})
+    return Realisations;}else{
+      return {message:`L'image n'a pas été importé`}
+    }
   } catch (error) {
     console.log(error);
   }
@@ -38,11 +43,13 @@ const getOne = async (id_Realisation) => {
   }
 };
 
-const update = async (body, id_Realisation) => {
+const update = async (body, id_Realisation, file) => {
   try {
-    const Realisations = await Realisation.update(body, {where : {id_Realisation:id_Realisation}})
+    const upload = await uploadFile(file)
+    console.log("mercure", upload)
+    const Realisations = await Realisation.update(body, {where : {id_Realisation:id_Realisation}},)
     return Realisations;
-  } catch (error) {
+  } catch (error) { 
     console.log(error);
   }
 };
