@@ -21,6 +21,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: true
       },
+      lien: {
+        type: DataTypes.STRING,
+        allowNull: true
+      },
     }, {
       timestamps: true,
       createdAt: 'created',

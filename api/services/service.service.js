@@ -45,10 +45,22 @@ const getOne = async (id_Service) => {
   }
 };
 
-const update = async (body, id_Service) => {
+const update = async (file, body, id_Service) => {
   try {
+    const upload = await uploadFile(file)
+    console.log("ok::", upload)
+    if(upload){
+    const Services = await Service.update({...body, image:upload}, {where : {id_Service:id_Service}})
+    return Services;
+  }
+  else if(!file)
+  {
     const Services = await Service.update(body, {where : {id_Service:id_Service}})
     return Services;
+  }
+  else{
+    return {message:`L'image n'a pas été importé`}
+  }
   } catch (error) {
     console.log(error);
   }

@@ -3,7 +3,7 @@ const validator = require('validator');
 const jwt = require('jsonwebtoken')
 var { User, Projet, Realisation } = require("../../config/database");
 var { Service } = require("../../config/database");
-const { uploadFile } = require('./upload.service');
+const { uploadFiles } = require('./upload.service');
 
 const register = async (username, password) => {
     try {
@@ -67,7 +67,8 @@ const login = async (username, password) => {
 
         if (status) {
             const token = jwt.sign({ Users }, process.env.ACCESS_TOKEN_SECRET, {
-                expiresIn: '24h'
+                // expiresIn: '24h'
+
             });
             return { message: 'Connexion réussie', status, token };
         }
@@ -78,21 +79,37 @@ const login = async (username, password) => {
     }
 };
 
-const profile = async (file, id_User) => {
+const profile = async ( id_User) => {
     try {
-        const upload = await uploadFile(file, 'Profile')
-        const Users = await User.findOne({ where: { id_User: id_User }, include: [{ model: Service }, { model: Projet }, { model: Realisation }] }, 
-            {...id_User, desc_realisation_image:upload, about_image:upload, image:upload});
+        const Users = await User.findOne({ where: { id_User: id_User }, include: [{ model: Service }, { model: Projet }, { model: Realisation }] });
         return Users;
     } catch (error) {
         console.log(error);
     }
 };
 
-const updateProfile = async (body, id_User) => {
+const updateProfile = async (files, body, id_User) => {
     try {
-        const [ updated ] = await User.update(body, {where: { id_User: id_User}});
-        return updated;
+        const upload = await uploadFiles(files, 'Profile')
+        console.log("okkk::",upload)
+        if(upload){
+            const updatedFields = {
+                image: upload[0],
+                about_image: upload[1],
+                desc_realisation_image: upload[2],
+              };
+            const [ updated ] = await User.update({...body, ...updatedFields}, {where: { id_User: id_User}});
+            return updated;
+        }
+        else if(!files)
+        {
+            const [ updated ] = await User.update(body, {where: { id_User: id_User}});
+            return updated;
+        }
+        else{
+            return {message:`L'image n'a pas été importé`}
+        }
+        
     } catch (error) {
         console.log(error);
     }

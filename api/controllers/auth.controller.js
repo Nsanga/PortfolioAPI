@@ -56,7 +56,7 @@ const Login = async (req, res) => {
       };
 
     const updateProfiles = async (req, res) => {
-        const profiles = await updateProfile(req.body, req.params.id_User); 
+        const profiles = await updateProfile(req.files, req.body, req.params.id_User); 
         console.log(profiles)
         try {
           if(profiles !== undefined)

@@ -12,7 +12,7 @@ router.delete("/:id", destroy);
 
 router.post("/create", upload.single('image'), create);
 
-router.put("/:id", update);
+router.put("/:id", upload.single('image'), update);
 
 
 

@@ -1,6 +1,6 @@
 const projetService = require('../services/projet.service')
 const create = async (req, res) => {
-  const projet = await projetService.create(req.body);
+  const projet = await projetService.create(req.file,req.body);
   console.log(projet)
   try {
     if(projet !== undefined)
@@ -71,12 +71,12 @@ const getOne = async (req, res) => {
 };
 
 const update = async (req, res) => {
-  const projet = await projetService.update(req.body, req.params.id);
+  const projet = await projetService.update(req.file,req.body, req.params.id);
   console.log(projet)
   try {
     if(projet !== undefined)
     {
-      res.json({ message:`La tache ${req.body.name} a bien été modifié.`, data: req.body })
+      res.json({ message:`La tache ${req.body.nom} a bien été modifié.`, data: req.body })
 
     }
     else{

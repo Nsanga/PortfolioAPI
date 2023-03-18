@@ -64,7 +64,7 @@ const getOne = async (req, res) => {
 };
 
 const update = async (req, res) => {
-  const service = await serviceService.update(req.body, req.params.id);
+  const service = await serviceService.update(req.file, req.body, req.params.id);
   console.log(service)
   try {
     if(service !== undefined)
